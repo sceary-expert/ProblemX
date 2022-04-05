@@ -1,0 +1,10 @@
+class Solution{
+    public:
+    int countSquare(int B)
+    {
+	  if(B<4)return 0;
+	 int n=(B/2)-1;
+	 int ans=n*(n+1)/2;
+	  return ans;
+    }
+};

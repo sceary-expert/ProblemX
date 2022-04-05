@@ -1,0 +1,35 @@
+class Solution {
+public:
+    ListNode* swapNodes(ListNode* head, int k) {
+       // vector<int>v;
+       ListNode* hd=head;
+        ListNode* hd1=head;
+        int count=0;
+          while(hd1){
+            //v.push_back(hd);
+              count++;
+            hd1=hd1->next;
+        }
+        int v[count];
+        int cnt=count;
+        while(hd){
+            //v.push_back(hd);
+            v[count-cnt]=hd->val;
+            cnt--;
+            hd=hd->next;
+        }
+        int n=count+1;
+        int ptr1=k-1,ptr2=n-k-1;
+        swap(v[ptr1],v[ptr2]);
+        ListNode* ptr=head->next;
+        
+        head->val=v[0];
+       // ptr=head->next;
+        for(int i=1;i<n-1;i++)
+        {
+           ptr->val=v[i];
+            ptr=ptr->next;
+        }
+        return head;
+    }
+};

@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int maximumProduct(vector<int>& nums, int k) {
+        int modi=1000000007;
+        priority_queue <int, vector<int>, greater<int>> minHeap;
+        for(auto it:nums)minHeap.push(it);
+        while(k--){
+            int temp=minHeap.top();
+            minHeap.pop();
+            minHeap.push(temp+1);
+            
+        }
+       long long int ans=1;
+        while(minHeap.size()){
+            ans=ans*minHeap.top();
+            ans%=modi;
+            minHeap.pop();
+        }
+        return (int)ans%modi;//180820950
+        
+    }
+};

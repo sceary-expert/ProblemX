@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int func(int n, vector<int>&dp){
+        if(n==0)return 1;
+        if(n<0)return 0;
+        if(dp[n]>0)return dp[n];
+        int res=func(n-1,dp)+func(n-2,dp);//2 will call 0 and 1 (1+func(1))
+        dp[n]=res;
+        return res;
+    }
+    int climbStairs(int n) {
+        vector<int>dp(n+1,0);
+        int ans=func(n,dp);
+        return ans;
+    }
+};

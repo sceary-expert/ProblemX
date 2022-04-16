@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int fibn(int n, vector<int>& qb){
+        if(n==0||n==1)return n;
+        if(n==2)return 1;
+        if(qb[n]>0)return qb[n];
+        int ans=fibn(n-1,qb)+fibn(n-2,qb)+fibn(n-3,qb);
+        qb[n]=ans;
+       
+        return ans;
+    }
+    int tribonacci(int n) {
+        vector<int> qb(n+1,0);
+        
+        return fibn(n,qb);
+    }
+};

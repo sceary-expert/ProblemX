@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int findClosestNumber(vector<int>& nums) {
+        vector<int>negative;
+        vector<int>positive;
+        for(auto it:nums){
+            if(it>=0)positive.push_back(it);
+            else negative.push_back(it);
+        }
+        int mini=INT_MAX;
+        bool negmini=false;
+        for(auto it:positive){
+            if(it<mini)mini=it;
+        }
+         for(auto it:negative){
+            if(abs(it)<mini){mini=abs(it);negmini=true;}
+        }
+        if(negmini)return -1*mini;
+        else return mini;
+        
+    }
+};

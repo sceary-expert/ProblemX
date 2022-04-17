@@ -1,0 +1,16 @@
+class Solution {
+public:
+    long long waysToBuyPensPencils(int total, int cost1, int cost2) {
+      //  if(cost1>total&&cost2>total)return 0;
+        long long penIcanBuy=total/cost1,ans=0;
+        for(int i=0;i<=penIcanBuy;i++){
+            long long penCost=i*cost1;
+            long long newTotal=total-penCost;
+            long long pencilIcanBuy=newTotal/cost2;
+            ans+=pencilIcanBuy;
+            ans+=1;
+           // cout<<ans<<endl;
+        }
+        return ans;
+    }
+};

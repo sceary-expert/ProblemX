@@ -1,0 +1,15 @@
+class Solution {
+public:
+unordered_map<string,string>mp;
+    long long count=0;
+        string encode(string longUrl) {
+        string str=to_string(count);
+        mp.insert({str,longUrl});
+        count++;
+        return str;        
+    }
+     string decode(string shortUrl) {
+          return mp[shortUrl];
+    }
+};
+

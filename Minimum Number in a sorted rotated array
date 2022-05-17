@@ -1,0 +1,17 @@
+class Solution
+{
+    public:
+    //Function to find the minimum element in sorted and rotated array.
+    int minNumber(int arr[], int low, int high)
+    {
+        // Your code here
+       int min=INT_MAX;
+       
+        for(int i=low;i<=high;i++){
+            
+            if(arr[i]<min)min=arr[i];
+            //cout<<i<<endl;
+        }
+        return min;
+    }
+};

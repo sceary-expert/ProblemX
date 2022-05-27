@@ -1,3 +1,4 @@
+using map:
 class Solution{
   public:
      void post(unordered_map<int,int>&mp,Node* root,int level){
@@ -19,4 +20,35 @@ class Solution{
         return ans;
     }
 };
+using BFS:
+class Solution{
+  public:
+    /*You are required to complete below method */
+    int maxLevelSum(Node* root) {
+        // Your code here
+        if(!root)return 0;
+        queue<Node*>q;
+        q.push(root);
+        int maxi=INT_MIN;
+        int level=0;
+        vector<int>v;
+        while(q.size()){
+            int sum=0;
+            int s=q.size();
+            while(s--){
+                Node* current=q.front();
+                q.pop();
+                sum+=current->data;
+                if(current->left)q.push(current->left);
+                if(current->right)q.push(current->right);
 
+            }
+            v.push_back(sum);
+            //maxi=max(sum,maxi);
+        }
+        for(auto it:v){
+            maxi=max(it,maxi);
+        }
+        return maxi;
+    }
+};

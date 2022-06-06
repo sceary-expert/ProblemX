@@ -1,0 +1,23 @@
+
+class Solution
+{
+    public:
+    long long countKdivPairs(int A[], int n, int K)
+    {
+        long long ans=0;
+        unordered_map<int,int>mp;
+        for(int i=0;i<n;i++){
+            mp[A[i]%K]++;
+        }
+        mp[K]=mp[0];
+        for(int i=0;i<n;i++){
+            mp[A[i]%K]--;
+            if(A[i]%K==0)mp[K]--;
+            long long temp=mp[K-(A[i]%K)];
+            ans+=temp;
+            mp[A[i]%K]++;
+            if(A[i]%K==0)mp[K]++;
+        }
+        return ans/2;
+    }
+};

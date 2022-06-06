@@ -1,0 +1,15 @@
+iclass Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *heada, ListNode *headb) {
+                unordered_map<ListNode*,int>mp;
+            while(heada){
+                    mp[heada]++;
+                    heada=heada->next;
+            }
+            while(headb){
+                    if(mp[headb])return headb;
+                    headb=headb->next;
+            }
+            return NULL;
+    }
+};

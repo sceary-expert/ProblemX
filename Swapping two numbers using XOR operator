@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int m,n;
+   
+cout<<"Enter value of m : "<<endl;
+
+   cin>>m;
+   cout<<"Enter value of n : "<<endl;
+
+   cin>>n;//m=5=>0101  n=13=1101
+   n=m^n;//0101
+        // 1101
+       //  1000
+       m=m^n;//0101
+            // 1000
+           //  1101---->13
+       n=m^n;//1101
+            // 1000
+           //  0101---->5
+           cout<<"The value of m is : "<<m<<endl;
+           cout<<"The value of n is : "<<n<<endl; 
+
+    return 0;
+}

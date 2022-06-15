@@ -16,3 +16,18 @@ int chocolates(int arr[], int n)
     return v[0];
     
 }
+-----------------------------------------------
+int chocolates(int arr[], int n)
+{
+    // Complete the function
+    int s=0;
+    int e=n-1;
+    while(e>s){
+        if(arr[s]>arr[e]){
+            s++;
+        }
+        else e--;
+    }
+    return arr[s];
+
+}

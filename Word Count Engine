@@ -1,0 +1,63 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+#include <string>
+
+
+using namespace std;
+
+vector<vector<string>> wordCountEngine( const string& document ) 
+{
+  // your code goes here
+map<string,int>mp;
+  vector<string>v;
+  for(int i=0;i<document.size();i++){
+    char c=document[i];
+    c = tolower(c);
+    if(c<'a'||c>'z')continue;
+    string str="";
+    while(document[i]!=' '&&i<document.size()){
+      char c=document[i];
+      c = tolower(c);
+      if(c<'a'||c>'z'){
+        i++;
+        continue;
+      }
+      str+=c;
+      i++;
+    }//practice
+    //cout<<str<<endl;
+   if(!mp[str]) v.push_back(str);
+    mp[str]++;
+    
+    
+    //arr[3]=prac
+
+  }
+  map<int,vector<string>>mp1;
+  int maxFreq=0;
+  for(int i=0;i<v.size();i++){
+    int freq=mp[v[i]];
+    if(freq>maxFreq)maxFreq=freq;
+    mp1[freq].push_back(v[i]);
+  }
+  //cout<<maxFreq<<endl; 
+  vector<vector<string>>ans;
+ // cout<<maxFreq<<endl;
+  while(maxFreq){
+    for(auto it:mp1[maxFreq]){
+    string temp=it;
+      ans.push_back({temp,to_string(maxFreq)});
+      
+      //cout<<maxFreq<<endl;
+    }//   ["makes", "1"], ["youll", "1"]
+    maxFreq--;
+  }
+                    return ans;
+}
+
+int main() {
+  return 0;
+}
+

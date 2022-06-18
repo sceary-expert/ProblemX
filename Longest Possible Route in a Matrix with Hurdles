@@ -1,0 +1,25 @@
+class Solution {
+public:
+    void dfs(int &ans,vector<vector<int>>&matrix,int xs, int ys , int xd, int yd,int dist ){
+        if(xs<0||ys<0||xs>=matrix.size()||ys>=matrix[0].size()||matrix[xs][ys]==0||matrix[xs][ys]==2)return;
+        if(xs==xd&&ys==yd){
+            ans=max(ans,dist);
+            return;
+        }
+        matrix[xs][ys]=2;//visited
+        dfs(ans,matrix,xs+1,ys,xd,yd,dist+1);
+        dfs(ans,matrix,xs-1,ys,xd,yd,dist+1);
+        dfs(ans,matrix,xs,ys-1,xd,yd,dist+1);
+        dfs(ans,matrix,xs,ys+1,xd,yd,dist+1);
+        matrix[xs][ys]=1;//un-visited
+        return;
+        
+        
+    }
+    int longestPath(vector<vector<int>> matrix, int xs, int ys, int xd, int yd)
+    {
+        int ans=0;
+        dfs(ans,matrix,xs,ys,xd,yd,0);
+        return ans==0?-1:ans;
+    }
+};

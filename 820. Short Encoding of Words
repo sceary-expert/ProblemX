@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int minimumLengthEncoding(vector<string>& words) {
+        unordered_map<string,int>mp;
+            int ans=0;
+        for(auto it:words)    
+        {
+                mp[it]++;
+        }
+        for(auto it:words)
+        {
+            int sz=it.size();
+                if(mp[it]>1)mp[it]=1;
+                    for(int i=0;i<sz;i++)
+                    {
+                            it.erase(0,1);
+                            if(mp[it])mp[it]--;
+
+                    }
+        }
+       for(auto it:words)
+       {
+               if(mp[it])
+               {
+                       ans+=it.size()+1;
+                       mp[it]--;
+               }
+       }
+            return ans;
+    }
+};

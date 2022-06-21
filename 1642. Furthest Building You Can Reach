@@ -1,0 +1,66 @@
+class Solution {
+public:
+    int furthestBuilding(vector<int>& heights, int bricks, int ladder) {
+            int n=heights.size();
+            priority_queue<int>pq;
+            int sum=0,ans=0;
+            for(int i=0;i<n-1;i++)
+            {
+                    if(heights[i]<heights[i+1])
+                    {
+                         int diff=heights[i+1]-heights[i];
+                         sum+=diff;
+                         pq.push(diff);
+                         if(sum>bricks)
+                         {
+                                 if(ladder>0)
+                                 {
+                                         ladder--;                                         
+                                         int top=pq.top();
+                                         pq.pop();
+                                         sum-=top;                                         
+                                 }
+                                 else break;
+                         }
+                    }
+                    ans=i+1;
+            }
+            return ans;
+          /*  int n=heights.size();
+            priority_queue<int>b;
+            int ans=0;
+        for(int i=0;i<n-1;i++)
+        {
+               // ans=i;
+                if(heights[i]<heights[i+1])
+                {
+                        int diff=heights[i+1]-heights[i];
+                        if(bricks>=diff)
+                        {
+                                bricks-=diff;
+                                b.push(diff);
+                        }
+                        else if(ladder>0)
+                        {
+                                if(b.size())
+                                {
+                                        int top=b.top();//maximum brick used
+                                                if(top>diff)
+                                                {
+                                                        bricks+=top;
+                                                        b.pop();
+                                                        ladder--;
+                                                        bricks-=diff;
+                                                }
+                                        else ladder--;
+                                }else ladder--;
+                        }
+                        else break;
+                        
+                }
+                
+             ans=i+1;
+        }
+            return ans;*/
+    }
+};

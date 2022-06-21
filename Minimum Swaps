@@ -1,0 +1,19 @@
+class Solution {
+  public:
+    int count(int N,vector<vector<int>> A,vector<vector<int>> B) {
+        int countDiff=0,oneInA=0,zeroInA=0,oneInB=0,zeroInB;
+        for(int i=0;i<N;i++)
+        {
+            for(int j=0;j<N;j++)
+            {
+                if(A[i][j]==1)oneInA++;
+                else zeroInA++;
+                if(B[i][j]==1)oneInB++;
+                else zeroInB++;
+                if(A[i][j]!=B[i][j])countDiff++;
+            }
+        }
+        if(oneInA!=oneInB||zeroInA!=zeroInB||countDiff%2!=0)return -1;
+        else return countDiff/2;
+    }   
+};

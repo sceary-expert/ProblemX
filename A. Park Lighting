@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int t;
+    cin>>t;
+    while (t--)
+    {
+        int m,n,ans;
+        cin>>m>>n;
+        ans=(m*n)+1;
+        cout<<ans/2<<endl;       
+
+    }
+    
+    
+    return 0;
+}

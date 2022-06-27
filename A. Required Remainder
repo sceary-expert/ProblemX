@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int t;
+    cin>>t;
+    while (t--)
+    {
+      long long int x, y, n;
+      cin>>x>>y>>n;
+      int a = n/x;
+      a = a*x;
+      if(a + y <=n)
+      {
+        cout<<a+y<<endl;
+      }
+      else{
+        cout<<a-x+y<<endl;
+      }
+
+    }
+    
+    
+    return 0;
+}

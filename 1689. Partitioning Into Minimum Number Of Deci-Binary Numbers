@@ -1,0 +1,12 @@
+class Solution {
+public:
+    int minPartitions(string n) {
+            int ans = 0;
+        for( auto &it:n)
+        {
+             int temp = it - '0';
+                if(temp > ans) ans = temp;
+        }
+            return ans;
+    }
+};

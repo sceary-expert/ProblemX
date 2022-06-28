@@ -1,0 +1,46 @@
+class Solution {
+public:               
+    int minDeletions(string s) {// aab
+       vector<char> Set;        // a
+       unordered_map<char, int>Map;// Map[a] = 1
+            int MaxFreq = 0; //1
+            for( auto &it:s)// a
+            {
+                    if(Map[it] == 0)Set.push_back(it);
+                    Map[it]++;
+                    if(Map[it] > MaxFreq)MaxFreq = Map[it];
+            }
+            vector<int>freq(MaxFreq + 1);
+            for(auto &it:Set)
+            {
+                    freq[Map[it]] += 1;
+                    
+            }
+            priority_queue<int>zeroPoint;
+            for(int i = MaxFreq; i>= 0 ;i--)
+            {
+                    if(freq[i] == 0)zeroPoint.push(i);
+            }
+            int ans = 0;
+            for(int i = MaxFreq; i>= 0 ;i--)
+            {
+                    if(freq[i] >1)
+                    {
+                            int k = freq[i];
+                            while(k > 1)
+                            {
+                                    while(zeroPoint.top()>i)
+                                    {
+                                            zeroPoint.pop();
+                                    }
+                                    int topi = zeroPoint.top();
+                                    zeroPoint.pop();
+                                    ans += (i - topi);
+                                    k--;
+                            }
+                    }
+            }
+            
+         return ans;   
+    }
+};

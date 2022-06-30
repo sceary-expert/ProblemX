@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+using namespace std;
+void solve()
+{
+   int n;
+      cin>>n;
+      vector<int>v(n);    
+      for( int i = 0 ;i< n ;i++)
+      {
+        cin>>v[i];        
+      }
+      int l = v[1];
+      
+      for(int i = 2; i< n; i++)
+      {
+ 
+        l = l^v[i];
+      }
+      if(l == v[0])
+        {
+          cout<<v[0]<<endl;
+          return;
+        }
+      for( int i = 1; i< n;i++)
+      {
+        int k = v[0];
+        
+        for(int j = 1; j<n;j++)
+        {
+          if(j == i)continue;
+          else k = k ^ v[j];
+        }
+        if(k ==v[i])
+        {
+          cout<<v[i]<<endl;
+          return;
+        }
+ 
+      }
+      return;
+}
+int main(){
+    int t;
+    cin>>t;
+    while (t--)
+    {
+     solve();
+    }
+    
+    
+    return 0;
+}

@@ -1,0 +1,29 @@
+class Solution {
+public:
+       long long int mod = 1000000007;
+        
+    int maxArea(int h, int w, vector<int>& horizontalCuts, vector<int>& verticalCuts) {
+            sort(horizontalCuts.begin(), horizontalCuts.end());
+             sort(verticalCuts.begin(), verticalCuts.end());
+            horizontalCuts.push_back(h);
+            verticalCuts.push_back(w);
+        int hori = 0;
+            int maxHori = 0;
+            int verti = 0;
+            int maxVerti = 0;
+            for(auto it:horizontalCuts)
+            {
+                    int temp = abs(it - hori);
+                    if(temp > maxHori)maxHori = temp%mod;
+                    hori = it;
+            }
+             for(auto it:verticalCuts)
+            {
+                    int temp = abs(it - verti);
+                    if(temp > maxVerti)maxVerti = temp%mod;
+                    verti = it;
+            }
+            
+            return( ((maxVerti % mod)*(maxHori % mod)) % mod);
+    }
+};

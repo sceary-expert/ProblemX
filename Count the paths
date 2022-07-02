@@ -1,0 +1,79 @@
+
+class Solution {
+public:
+int answer;
+vector<int>visited;
+/*void BFS(vector<vector<int>>graph, int s, int t)
+{
+    queue<int>que;
+    que.push(s);
+    visited[s] = 1;
+    while(que.size())
+    {
+        int sz = que .size();
+        for( int i = 0; i < sz ; i++)
+        {
+            //if(que.size() == 0)return;
+            int curr = que.front();
+            que.pop();
+            for(auto it: graph[curr])
+            {
+                cout<<it<<" "<<t<<endl;
+                if(it == t)answer++;
+                if(!visited[it])
+                {
+                    que.push(it);
+                    visited[it]= 1;
+                }
+            }
+            
+        }
+    }
+    return;
+}*/
+    void solve(vector<vector<int>> graph, int s, int d)
+    {
+        queue<int>que;
+        que.push(s);
+        visited[s] = 1;
+        while(que.size())
+        {
+            int curr = que.front();
+            que.pop();
+            for(auto it: graph[curr])
+            {
+                if(visited[it]==0)
+                {
+                    visited[it]=1;
+                    if(it == d)answer ++;
+                   solve(graph, it, d); 
+                   visited[it] = 0;
+                }
+            }
+        }
+        visited[s] = 0;
+        
+    }
+	int possible_paths(vector<vector<int>>edges, int n, int s, int d){
+	    // Code here
+	    
+	    vector<vector<int>>graph(n);
+	    visited.resize(n);
+	    bool present = false;
+	    for(auto &it : edges)
+	    {
+	        graph[it[0]].push_back(it[1]);
+	        present = true;
+	    }
+	    if(!present)
+	    {
+	        if(s == d)return 1;
+	        
+	    }
+	    answer = 0;
+	    solve(graph, s, d);
+	     if(s == d)return answer + 1;
+	    return answer;
+	    
+	}
+};

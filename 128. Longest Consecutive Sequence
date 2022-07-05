@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+            if(nums.size() == 0)return 0;
+        priority_queue<int,vector<int>,greater<int>>minHeap;
+            for(auto &e:nums)
+            {
+                    minHeap.push(e);
+            }
+            int prev = minHeap.top();//1
+            
+            minHeap.pop();
+            int ans = 1;
+            int len = 1;
+            while(minHeap.size())
+            {
+                    int curr = minHeap.top();//2
+                    minHeap.pop();
+                    if(curr == prev+1){
+                            prev = curr;
+                            len++;
+                            
+                            if(len > ans)ans = len;
+                    }
+                    else if(curr == prev)continue;
+                    else {
+                            len = 1;
+                            prev = curr;
+                    }
+            }
+            return ans;
+    }
+};

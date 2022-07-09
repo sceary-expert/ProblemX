@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+using namespace std;
+void solve()
+{
+  int n;
+  cin>>n;
+  if(n % 4 != 0)
+  {
+    cout<<"NO"<<endl;
+    return;
+  }
+  cout<<"YES"<<endl;
+  int Total = 0;
+  for(int i = 0; i < n ; i+=2)
+  {
+    //if(i % 2)continue;
+    cout<<i+2<<" ";
+    Total += i+2;
+  }
+   for(int i = 0; i < n - 2 ; i+=2)
+  {
+    //if(i % 2)continue;
+    cout<<i+1<<" ";
+    Total -= i+1;
+  }
+  cout<<Total<<endl;
+  return;
+}
+int main(){
+    // freopen("input1.txt", "r", stdin);
+    // freopen("output1.txt", "w", stdout);
+    int t;
+    cin>>t;
+    while (t--)
+    {
+     solve();      
+    }
+    
+    
+    return 0;
+}

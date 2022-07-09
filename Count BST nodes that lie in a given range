@@ -1,0 +1,24 @@
+class Solution{
+public:
+#define val data
+    void solve(Node *root, int &ans,int l, int h)
+    {
+        if(root == NULL)return;
+        int t = root->val;
+        if(t >= l && t <= h)
+        {
+            ans++;
+        }
+        solve(root->left, ans, l, h);
+        solve(root->right, ans, l, h);
+        return;
+    }
+    int getCount(Node *root, int l, int h)
+    {
+      // your code goes here 
+      int ans = 0;
+      solve(root, ans, l, h);
+      return ans;
+    }
+};
+

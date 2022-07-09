@@ -1,0 +1,34 @@
+class Solution {
+public:
+       bool isNonDec(vector<int>arr)
+        {
+                int n = arr.size();
+                for(int i = 0;i < n-1; i++)
+                {
+                    if(arr[i + 1] < arr[i])
+                    {
+                            return false;
+                    }
+                }
+               return true;
+        }
+    bool checkPossibility(vector<int>& nums) {
+            //bool canChange = true;
+            int n = nums.size();
+            for(int i = 0 ;i <n-1;i++)
+            {
+                    int pos1 = nums[i], pos2 = nums[i + 1];//2
+                  if( pos2 < pos1)
+                  {
+                    nums[i] = nums[i + 1];
+                    bool c1 = isNonDec(nums);
+                          nums[i] = pos1;
+                          nums[i + 1] = pos1;                          
+                    bool c2 = isNonDec(nums);       
+                          if(c1 || c2) return true;
+                          else return false;
+                  }
+            }
+        return true;
+    }
+};

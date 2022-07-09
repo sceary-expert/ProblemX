@@ -1,0 +1,20 @@
+class Solution {
+public:
+    bool evaluateTree(TreeNode* root) {
+            if(root ->left == NULL) return root -> val == 0?false:true; 
+        bool b1 = evaluateTree(root -> left);
+            if(root -> right == NULL) return root -> val == 0?false:true; 
+        bool b2 = evaluateTree(root -> right);
+            if(root -> val == 2)
+            {
+                    if(b1 || b2)return true;
+                    else return false;
+            }
+            if(root -> val == 3)
+            {
+                    if(b1 && b2)return true;
+                    else return false;
+            }
+            return false;
+    }
+};

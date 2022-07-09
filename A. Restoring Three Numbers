@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+void solve()
+{
+  vector<int>v(4);
+  for(int i = 0;i<4; i++)
+  {
+    cin>>v[i];
+  };
+  sort(v.begin(),v.end());
+  int maxi = v[3];
+  int c = v[3] - v[1];
+  int rest = v[3] - c;
+  int b = rest - (v[2] - c);
+  int a = rest - b;
+  cout<<a<<" "<<b<<" "<<c<<endl;
+
+
+  
+  return;
+}
+int main(){
+    // freopen("input1.txt", "r", stdin);
+    // freopen("output1.txt", "w", stdout);
+    
+    {
+     solve();      
+    }
+    
+    
+    return 0;
+}

@@ -1,0 +1,23 @@
+vector<int> reaching_height(int n, int a[]) {
+    priority_queue<int>maxh;
+    priority_queue<int, vector<int>,greater<int>>minh;
+    int t = a[0];
+    bool f = true;
+    for(int i = 0;i < n;i++)
+    {
+        if(a[i] != t)f = false;
+        maxh.push(a[i]);
+        minh.push(a[i]);
+    }
+    vector<int>v;
+    while(v.size()<n)
+    {
+        v.push_back(maxh.top());
+        maxh.pop();
+        if(v.size()>=n)break;
+        v.push_back(minh.top());
+        minh.pop();
+    }
+    if(f == true and n > 1)return {-1};
+    else return v;
+}

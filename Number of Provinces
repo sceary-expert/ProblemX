@@ -1,0 +1,39 @@
+class Solution {
+  public:
+  void DFS(int v, vector<vector<int>>adj, int n, int& p,vector<bool>& visited)
+  {
+      visited[v] = true;
+      vector<int>curr = adj[v];//1, 0, 1
+      for(int i = 0; i< n; i++)
+      {
+          //if(i == v)continue;
+          if(visited[i] == false && curr[i] == 1)
+          {
+              DFS(i, adj, n, p, visited);
+          }
+      }
+      return;
+  }
+  void DfsHelper(int v, vector<vector<int>>adj, int n, int& p, vector<bool>&visited)
+  {
+      DFS(v, adj, n, p, visited);
+      p++;
+      for(int i = 0; i< n; i++)//true, false, true
+      {
+          if(visited[i] == false)
+          {
+              DFS(i, adj, n, p, visited);
+              p++;
+          }
+      }
+      return;
+  }
+    int numProvinces(vector<vector<int>> adj, int V) {
+        // code here
+        int n = V;
+        vector<bool>visited(n);
+        int p = 0;
+        DfsHelper(0, adj, n, p, visited);
+        return p;
+    }
+};

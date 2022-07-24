@@ -1,0 +1,27 @@
+class Solution{
+    public:
+    void func(Node* root, int& maxi, int curr)
+    {
+        if(root == NULL)   
+        {
+            if(curr > maxi)maxi = curr;
+            return;
+        }
+        curr += root -> data;
+        func(root -> left, maxi, curr);
+        func(root -> right, maxi, curr);
+        return;
+        
+    }
+    int maxPathSum(Node* root)
+    {
+        
+        int maxi = 0;
+        int curr = root -> data;
+        func(root -> left, maxi, curr);
+        func(root -> right, maxi, curr);
+        
+        //code here
+        return maxi;
+    }
+};

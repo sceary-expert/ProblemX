@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define int unsigned long long
+int f(int n)
+{
+    if(n == 0)return 1;
+    return 2 * f(n - 2);
+}
+void solve()
+{
+    int n, m;
+    vector<bool>v(26, false);
+    string s;
+    cin>>n>>m;
+    cin>>s;
+    for(int i = 0; i < m; i++)
+    {
+        char c;
+        cin>>c;
+        v[c - 'a'] = true;
+    }
+    int ans = 0;
+    for(int i = 0; i < n; i++)
+    {
+        int count = 0;
+
+        while(i < n && v[s[i] - 'a'])
+        {
+            count++;
+            i++;
+        }
+        ans += count*(count + 1)/ 2;
+    }
+    cout<<ans<<"\n";
+    return;
+}
+signed main(){
+    // freopen("input1.txt", "r", stdin);
+    // freopen("output1.txt", "w", stdout);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);    
+    solve();    
+    return 0;
+}

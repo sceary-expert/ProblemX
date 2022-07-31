@@ -1,0 +1,131 @@
+class Solution {
+public:
+    int minimumOperations(vector<int>& nums) {
+//         int d = 0, n = nums.size(), ans = 0;
+//             priority_queue<int>maxh;
+//             priority_queue<int, vector<int>, greater<int>>minh;
+//             for(auto &num : nums)
+//             {
+//                     minh.push(num);
+//                     maxh.push(num);
+//             }
+            
+            
+//             while(maxh.top() - d > 0 && minh.size())
+//             {
+                    
+//                     int prevd = d;
+//                 d += minh.top() - prevd;
+//                     minh.pop();
+//                     while(minh.top() - d <= 0)
+//                     {
+//                           minh.pop();  
+//                     }
+//                 ans++;                    
+//             }
+                    
+//             return ans;
+//             int n = nums.size(), smallestNum = -1, ans = 0, ind =0;
+//             sort(nums.begin(), nums.end());
+//             for(int i = 0; i< n; i++)
+//             {
+//                     if(nums[i] > 0)
+//                     {smallestNum = nums[i];
+//                     ind = i;
+//                     break;}
+//             }
+//             if(smallestNum == -1)return ans;
+//             //cout<<smallestNum<<ind<<"\n";
+//             while(ind < n)
+//             {
+//                             for(int i = ind; i < n; i++)
+//                             {
+
+//                                     nums[i] = nums[i] - smallestNum;
+//                                     ans++;
+                                   
+//                             }
+//                      smallestNum = -1;                    
+//                             for(int i = ind; i< n; i++)
+//                                                       {
+//                                                             if(nums[i] > 0)
+//                                                             {
+//                                                                     smallestNum = nums[i];
+//                                                                      ind = i;
+//                                                                     break;
+//                                                             }
+//                                                      }
+//                                     if(smallestNum == -1)return ans;
+//             }
+//             return ans;
+//             int d = 0, n = nums.size(), ans = 0;
+//             priority_queue<int>maxh;
+//             priority_queue<int>maxh2;
+//             priority_queue<int, vector<int>, greater<int>>minh;
+//             for(auto &num : nums)
+//             {
+//                     minh.push(num);
+//                     maxh.push(num);
+//             }
+//           while(minh.size() && minh.top() < 1)
+//           {
+//                   minh.pop();
+//           }
+//             if(!minh.size())return ans;
+//             while(maxh.top() > 0)
+//             {
+//                     int s = minh.top();
+//                     minh.pop();
+                    
+//                     while(maxh.size() && maxh.top() > 0)
+//                     {
+//                             int top = maxh.top();
+//                             top -= s;
+//                             maxh.pop();
+//                             maxh2.push(top);
+//                     }
+                    
+//                     while(maxh2.size())
+//                     {
+//                             int top = maxh2.top();
+//                             maxh2.pop();
+//                             maxh.push(top);
+                                   
+//                     }
+//                     ans++;
+//                     if(!minh.size())return ans;
+//             }
+//             return ans;
+            int ind = -1, n = nums.size(), steps = 0, newInd;
+            sort(nums.begin(), nums.end());
+            while(true){
+                    
+                    for(int i = 0 ; i < n ; i ++)
+                    {
+                            if(nums[i] > 0)
+                            {
+                                    ind = i;
+                                    break;
+                            }
+                    }
+                    
+                    //for(auto it : nums)cout<<it<<" ";
+                   // cout<<"\n";
+                    //[0, 0, 2, 4, 4]
+                    if(ind == -1) return steps;
+                    int d = nums[ind];
+                    for(int i = ind; i< n; i++)
+                    {
+                            //cout<<nums[ind]<<" "<< nums[i]<<"\n";
+                            nums[i] = nums[i] - d;                    
+                    }
+                   ind = -1;
+                    steps++;
+            }
+            
+            return steps;
+            
+                    
+    }
+};
+

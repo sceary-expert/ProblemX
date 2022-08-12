@@ -1,0 +1,32 @@
+class Solution
+{
+    public:
+    //Function to perform case-specific sorting of strings.
+    string caseSort(string str, int n)
+    {
+        // your code here
+        priority_queue<char, vector<char>, greater<char>>minUp;
+        priority_queue<char, vector<char>, greater<char>>minLow;
+        for(auto &c : str)
+        {
+            if(c >= 'a' && c <= 'z')minLow.push(c);
+            if(c >= 'A' && c <= 'Z')minUp.push(c);
+        }
+        for(int i = 0; i < n; i++)
+        {
+            char c = str[i];
+            if(c >= 'a' && c <= 'z')
+            {
+                str[i] = minLow.top();
+                minLow.pop();
+            }
+            else if(c >= 'A' && c <= 'Z')
+            {
+                str[i] = minUp.top();
+                minUp.pop();
+            }
+                
+        }
+        return str;
+    }
+};

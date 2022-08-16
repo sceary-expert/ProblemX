@@ -1,0 +1,32 @@
+class Solution {
+  public:
+  int convert_to_mask(string s)
+  {
+      int mask = 0;
+      for(auto &c : s)
+      {
+          int j = (c - 'a');
+          mask ^= (1<<j);
+      }
+      return mask;
+  }
+    long long getNumGoodPair(int N, vector<string> &A) {
+        // code here
+        long long ans = 0;
+        unordered_map<int, int>mp;
+        for(int i = 0; i < N; i++)
+        {
+            string s = A[i];
+            int mask = convert_to_mask(s);//00000111
+            ans += mp[mask];
+            for(int j = 0; j < 32; j++)
+            {
+                int temp = mask ^ (1<<j);
+                ans += mp[temp];
+            }
+            mp[mask]++;
+        }
+        
+        return ans;
+    }
+};

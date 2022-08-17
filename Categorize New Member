@@ -1,0 +1,16 @@
+function openOrSenior(data){
+ 
+ var n = Object.keys(data).length;
+  let arr = [];
+  arr.length = n;
+  for(let i = 0; i < n; i++)
+    {
+      if(data[i][0] > 54 && data[i][1] > 7)
+        {
+          arr[i] = "Senior";
+        }
+      else arr[i] = "Open";
+    }
+  return arr;
+  
+}

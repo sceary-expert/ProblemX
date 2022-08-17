@@ -1,0 +1,51 @@
+class Solution {
+public:
+int n, t1, t2;
+bool f = false;
+bool isValid(int x, int y, vector<vector<int>>& visited)
+{
+    if(x <= 0 || y <= 0 ||x > n || y > n || visited[x][y] > 0)return false;
+    visited[x][y] += 1;
+    if(x == t1 && y == t2)f = true;
+    return true;
+}
+	int minStepToReachTarget(vector<int>&k, vector<int>&T, int N){
+	    // Code here
+	    n = N;
+	    t1 = T[0];
+	    t2 = T[1];
+	    queue<pair<int, int>>q;
+	    //unordered_map<pair<int, int>, int>visited;
+	    vector<vector<int>>visited(N + 1, vector<int>(N + 1, 0));
+	    q.push({k[0], k[1]});//{4, 5}
+	    visited[k[0]][k[1]] += 1;
+	    int level = 0;
+	    while(q.size())
+	    {
+	       
+	        int sz = q.size();
+	        for(int i = 0; i < sz; i++)
+	        {
+	             auto top = q.front();
+    	        q.pop();
+    	        int x = top.first;
+    	        int y = top.second;
+    	       // cout<<x<<" "<<y<<endl;
+    	        if(x == T[0] && y == T[1])return level;
+    	        if(isValid(x + 2, y + 1, visited))q.push({x + 2, y + 1});
+    	        if(isValid(x + 2, y - 1, visited))q.push({x + 2, y - 1});
+    	        if(isValid(x - 2, y + 1, visited))q.push({x - 2, y + 1});
+    	        if(isValid(x - 2, y - 1, visited))q.push({x - 2, y - 1});
+    	        if(isValid(x + 1, y - 2, visited))q.push({x + 1, y - 2});// 4, 5 --> 5, 3
+    	        if(isValid(x - 1, y - 2, visited))q.push({x - 1, y - 2});
+    	        if(isValid(x + 1, y + 2, visited))q.push({x + 1, y + 2});
+    	        if(isValid(x - 1, y + 2, visited))q.push({x - 1, y + 2});
+    	        //if(f)return level;
+	        }
+	        level ++;
+	    }
+	    
+	    return -1;
+	}
+};
+

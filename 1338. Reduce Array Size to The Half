@@ -36,3 +36,38 @@ public:
             
     }
 };
+/*------------------------------------------------------------------------*/
+class Solution {
+public:
+    int minSetSize(vector<int>& arr) {
+        unordered_map<int, int>mp;
+            unordered_set<int>S;
+        for(auto &it : arr)
+        {
+                mp[it]++;
+                S.insert(it);
+        }
+
+         priority_queue<int>v;
+        for(auto &it : mp)
+        {
+
+                v.push(it.second);
+
+
+        }
+        int n = arr.size();
+            int currSize = n;
+            n /= 2;
+            int ans = 0;
+            while(currSize > n)
+            {
+                 int top =  v.top();
+                    v.pop();
+                    currSize -= top;
+                    ans++;
+            }
+         return ans;
+
+    }
+};

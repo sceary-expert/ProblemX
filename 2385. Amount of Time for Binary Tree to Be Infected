@@ -1,0 +1,50 @@
+
+class Solution {
+public:
+    unordered_map<int, vector<int>>g;    
+        void makeGraph(TreeNode* root, int par)
+        {
+                if(root == NULL) return;
+                if(root -> left)g[root -> val].push_back(root -> left -> val);
+                if(root -> right)g[root -> val].push_back(root -> right -> val);
+                if(par != -1)g[root -> val].push_back(par);
+                
+                makeGraph(root -> left, root -> val);
+                makeGraph(root -> right, root -> val);
+                return;
+                
+        }
+    int amountOfTime(TreeNode* root, int start) {
+            //int h = help(root);
+            makeGraph(root, -1);
+            queue<int>q;
+            q.push(start);
+            map<int, bool> visited;
+            visited[start] = true;
+            int level = 0;
+            
+            while(q.size())
+            {
+                    int sz = q.size();
+                    bool f = false;
+                    for(int i = 0; i < sz; i++)
+                    {
+                            int top = q.front();
+                            q.pop();
+                            for(auto &it : g[top])
+                            {
+                                    if(visited[it] == 0)
+                                    {
+                                            q.push(it);
+                                            visited[it] = true;
+                                                f = true;
+                                    }
+                            }
+                    }
+                    if(f) level ++;
+                   
+            }
+            
+        return level;
+    }
+};

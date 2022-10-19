@@ -6,8 +6,8 @@ public:
         if(x == 0 && y == 0)return 1;
         if(x < 0 || y < 0)return 0;
         if(dp[x][y] != -1)return dp[x][y];
-        int k = (findPath(x - 1, y, dp) + findPath(x, y - 1, dp));      
-            return dp[x][y] = k ;
+        return dp[x][y] = (findPath(x - 1, y, dp) + findPath(x, y - 1, dp));      
+            
     }
     int uniquePaths(int m, int n) {
         vector<vector<int>>dp(m, vector<int>(n, -1));

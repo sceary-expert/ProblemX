@@ -1,0 +1,35 @@
+class Solution {
+public:
+    vector<int> findSubstring(string s, vector<string>& words) {
+            int n = s.size();
+        vector<int>ans;
+            int wordLen = words[0].size();
+            int len = words.size() * wordLen;
+            unordered_map<string, int>Freq;
+            for(auto &word : words)
+            {
+                Freq[word]++;
+            }
+            for(int i = 0; i <= n - len ; i++)
+            {
+                   // cout<<i<<" ";
+                 unordered_map<string, int>freq = Freq;
+                    int count = words.size();
+                 for(int j = 0; j < len; j+=wordLen)   
+                 {
+                         
+                         string str = "";
+                       for(int k = 0; k < wordLen; k++)
+                         str += s[i + j + k];
+                         if(freq[str])
+                          {
+                                 freq[str]--;
+                                 count--;
+                         }
+                 }
+                    if(count == 0)ans.push_back(i);
+                    
+            }           
+            return ans;
+    }
+};

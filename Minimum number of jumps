@@ -1,0 +1,31 @@
+
+class Solution{
+  public:
+  bool f = false;
+    int help(int arr[], int l, int n)
+    {
+        int res = INT_MAX;
+        if(l >= n - 2)return 0;
+        
+            int range = arr[l];
+            for(int j = 1; j <= range; j++)
+            {
+                res = min(res, help(arr, l + j, n));
+            }
+        
+        if(res == INT_MAX)
+        {
+            f = true;
+            return -1;
+        }
+        return 1 + res;
+    }
+    int minJumps(int arr[], int n){
+        // Your code here
+        int ans = help(arr, 0, n);
+        if(f)return -1;
+        return ans;
+    }
+};
+
+

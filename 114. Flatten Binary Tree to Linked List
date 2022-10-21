@@ -1,0 +1,31 @@
+class Solution {
+public:
+    //#define val data   
+    void preOrder(TreeNode* root, vector<TreeNode* >& v)    
+    {
+            if(root == NULL)return;
+            v.push_back(root);
+            preOrder(root -> left, v);
+            
+            preOrder(root -> right, v);
+            return;
+            
+    }
+    void postOrder(TreeNode* root, vector<TreeNode* > v, int ind)    
+    {
+            if(ind == v.size() || !root)return;
+            root -> left = NULL;
+            root -> right = v[ind];
+            postOrder(root -> right, v, ind + 1);
+            return;
+    }
+    void flatten(TreeNode* root) {
+        vector<TreeNode* >v;
+           
+            preOrder(root, v);
+             //for(auto &it : v)cout<<it -> val<<endl;
+           postOrder(root, v, 1);
+            return;
+            
+    }
+};

@@ -1,0 +1,45 @@
+
+class Solution{
+public:
+    /*You are required to complete this method*/
+    int maxChainLen(struct val p[],int n){
+        //Your code here
+        int ans = 1;
+        unordered_map<int, int>visited;
+        // customSort(p, n);
+        sort(p, p+n, [] (val a, val b){
+        return a.second < b.second;
+        });
+        // for(int i = 0; i < n; i++)
+        // {
+        //     int fir = p[i].first;
+        //     int sec = p[i].second;
+            
+        //     cout<<fir<<" "<<sec<<endl;
+        // }
+        for(int i = 0; i < n; i++)
+        {
+            int f = p[i].first;
+            int s = p[i].second;
+            if(!visited[f])
+            {
+                visited[f]++;
+                int count = 0;
+                for(int j = i; j < n; j++)
+                {
+                     int f1 = p[j].first;
+                     int s1 = p[j].second;
+                     if(s < f1)
+                     {
+                         count++;
+                         visited[f1]++;
+                         s = s1;
+                         f = f1;
+                     }
+                }
+                if(count + 1 > ans) ans = count + 1;
+            }
+        }
+        return ans;
+    }
+};

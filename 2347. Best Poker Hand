@@ -1,0 +1,22 @@
+class Solution {
+public:
+    string bestHand(vector<int>& ranks, vector<char>& suits) {
+        int maxRank = 0, maxSuit = 0;
+            unordered_map<int, int>rankMap;
+            unordered_map<char, int>suitMap;
+            for(auto &it : ranks)
+            {
+                    rankMap[it]++;
+                    if(rankMap[it] > maxRank)maxRank = rankMap[it];
+            }
+            for(auto &it : suits)
+            {
+                    suitMap[it]++;
+                    if(suitMap[it] > maxSuit)maxSuit = suitMap[it];
+            }
+            if(maxSuit>=5)return "Flush";
+            if(maxRank >= 3)return "Three of a Kind";
+            if(maxRank >= 2) return "Pair";
+            else return "High Card";
+    }
+};

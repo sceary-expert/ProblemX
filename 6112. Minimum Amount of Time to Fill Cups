@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int fillCups(vector<int>& amount) {
+            sort(amount.begin(), amount.end());
+            int maxi = amount[2];
+            int c1 = amount[0], c2 = amount[1];
+            if(c1 + c2 <= maxi) return maxi;
+            else{
+                  int rem = c1 + c2 - maxi;
+                  //int rem2 = abs(c1 - c2);
+                    int ans = (rem + 1)/2;
+                    return maxi + ans;
+                    
+                    
+            }
+        
+    }
+};

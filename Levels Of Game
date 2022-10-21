@@ -1,0 +1,45 @@
+
+class Solution{
+    public:
+    vector<vector<int>>r1;
+    vector<vector<int>>r2;
+    vector<vector<int>>r3;
+    int road1(int h, int m)
+    {
+        if(r1[h][m] != -1)return r1[h][m];
+         int H = h;
+        int M = m;
+        h += 3;
+        m += 2;
+        
+        return r1[H][M] = 1 + max(road2(h, m), road3(h, m));
+    }
+    int road2(int h, int m)
+    {
+        if(r2[h][m] != -1)return r2[h][m];
+         int H = h;
+        int M = m;
+        h -= 5;
+        m -= 10;
+        if(h <= 0 || m <= 0)return r2[H][M] = 0;
+        else return r2[H][M] = 1 + max(road1(h, m), road3(h, m));
+    }
+    int road3(int h, int m)
+    {
+        if(r3[h][m] != -1)return r3[h][m];
+        int H = h;
+        int M = m;
+        h -= 20;
+        m += 5;
+        if(h <= 0 || m <= 0)return r3[H][M] = 0;
+        return r3[H][M] = 1 + max(road1(h, m), road2(h, m));
+    }
+        int maxLevel(int h,int m)
+        {
+            // code here
+            r1.resize(3006, vector<int>(3006 ,-1));
+            r2.resize(3006, vector<int>(3006,-1));
+            r3.resize(3006, vector<int>(3006,-1));
+            return max(road1(h, m), max( road2(h, m), road3(h, m)));
+        }
+};

@@ -1,0 +1,73 @@
+class Solution {
+public:
+    int minSetSize(vector<int>& arr) {// 
+        unordered_map<int, int>mp;
+            unordered_set<int>S;// 54 -> 1   8 -> 1    18 -> 1
+        for(auto &it : arr) //      68 -> 1  58 -> 1      
+        {
+                mp[it]++;//     77--> 1       92 --> 1      14 -->1
+                S.insert(it);// 63 --> 1,  22 --> 1
+        }
+            /*
+            19 -> 2
+            38 -> 2
+              9--> 2
+            */
+         priority_queue<int>v;
+        for(auto &it : S)    
+        {
+                int freq = mp[it];// 4, 3, 3, 1
+                v.push(freq);
+                //cout<<freq<<" ";
+                
+        }
+        int n = arr.size();
+            int currSize = n;//10
+            n /= 2;//5
+            int ans = 0;
+            while(currSize > n)
+            {
+                 int top =  v.top();
+                    v.pop();
+                    currSize -= top;//6
+                    ans++;
+            }
+         return ans;   
+            
+    }
+};
+/*------------------------------------------------------------------------*/
+class Solution {
+public:
+    int minSetSize(vector<int>& arr) {
+        unordered_map<int, int>mp;
+            unordered_set<int>S;
+        for(auto &it : arr)
+        {
+                mp[it]++;
+                S.insert(it);
+        }
+
+         priority_queue<int>v;
+        for(auto &it : mp)
+        {
+
+                v.push(it.second);
+
+
+        }
+        int n = arr.size();
+            int currSize = n;
+            n /= 2;
+            int ans = 0;
+            while(currSize > n)
+            {
+                 int top =  v.top();
+                    v.pop();
+                    currSize -= top;
+                    ans++;
+            }
+         return ans;
+
+    }
+};

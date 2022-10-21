@@ -1,0 +1,49 @@
+class Solution
+{
+    public:
+    bool res;
+    bool DFS(int curr, int par, vector<int> vis, map<int, vector<int>>&mp, int n)
+    {
+        vis[curr]++;
+        for(auto &it : mp[curr])
+        {
+            if(it == par || vis[it] > 0)continue;
+             DFS(it, curr, vis, mp, n);
+            //if(f == false)return false;
+        }
+        bool f = true;
+        for(int i = 1; i <= n; i++)
+        {
+            if(vis[i] != 1)
+            {
+                f = false;
+                break;
+            }
+                
+        }
+        if(f == true)res = true;
+        
+    }
+    bool check(int n,int M,vector<vector<int>> Edges)
+    {
+        res = false;
+        map<int, vector<int>>mp;
+        for(auto it : Edges)
+        {
+            int a = it[0], b = it[1];
+            mp[a].push_back(b);
+            mp[b].push_back(a);
+            
+        }
+        
+        for(int i = 1; i <= n; i++)
+        {
+            vector<int>vis(n + 1, 0);
+            
+            DFS(i, -1, vis, mp, n);
+            if(res == true)return true;
+            
+        }
+        return false;
+    }
+};

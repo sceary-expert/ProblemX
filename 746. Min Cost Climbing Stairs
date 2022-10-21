@@ -1,0 +1,15 @@
+class Solution {
+public:
+        vector<int>memo;
+        int f(int i, vector<int>cost,int n)
+        {
+                if(i >= n)return 0;
+                if(memo[i]>0)return memo[i];
+                return memo[i]=min(f(i+2,cost,n), f(i+1, cost, n))+cost[i];
+        }
+    int minCostClimbingStairs(vector<int>& cost) {
+            int n = cost.size();
+            memo.resize(n + 1);
+        return min(f(0,cost,n),f(1,cost,n));
+    }
+};

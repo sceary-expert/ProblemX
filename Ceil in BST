@@ -1,0 +1,24 @@
+
+void inorder(vector<int>& v, Node* root, int target)
+{
+    if(root == NULL) return;
+    inorder(v, root -> left, target);
+    v.push_back(root -> data);
+    inorder(v, root -> right, target);
+    return;
+}
+// Function to return the ceil of given number in BST.
+
+int findCeil(Node* root, int input) {
+    if (root == NULL) return -1;
+
+    vector<int>v;
+    inorder(v, root, input);
+    for(auto &it: v)
+    {
+        if(it >= input)return it;
+        
+    }
+    
+    
+}

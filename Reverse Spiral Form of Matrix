@@ -1,0 +1,73 @@
+class Solution {
+  public:
+    vector<int> reverseSpiral(int R, int C, vector<vector<int>>&a)  {
+        // code here
+        //int r = R / 2, c = (C + 1) / 2;
+        //c--;
+        //centre popsition is at c, r position 
+        // left, down, right, right, up, up   
+        //upperbound is r - 1, lower bound is r + 1
+        //left bound is c - 1 and right bound is c + 1
+        //int left = max(0, c - 1), right = min(C - 1, c + 1);
+        //int up = max(0, r - 1), down = min(r + 1, R - 1);
+        /*
+        1 4
+        13 11 8 1
+        */
+        int left = 0, right = C - 1, top = 0, down = R - 1;
+        
+        int dir = 0;// left -> right 
+        vector<int>ans;
+        //cout<<"LeFT : "<<left<<" RIGHT : "<<right<<" TOP: "<<top<<endl;
+        //return ans;
+        int tot = R * C;
+        while(ans.size() < tot)
+        {
+            if(dir == 0)
+            {
+                //left -> right
+                for(int i = left ; i <= right; i++)
+                {
+                    ans.push_back(a[top][i]);
+                    //cout<<ans.back()<<endl;
+                }
+                top++;
+            }
+            else if(dir == 1)
+            {
+                //top -> bottom
+                 for(int i = top; i <= down;i++)
+                {
+                    ans.push_back(a[i][right]);
+                }
+                right--;
+                
+            }
+            else if(dir == 2)
+            {
+                // right -> left
+                for(int i = right ; i >= left;i--)
+                {
+                    ans.push_back(a[down][i]);
+                }
+                down--;
+                
+            }
+            else if(dir == 3)
+            {
+                //buttom -> top
+                for(int i = down; i >= top; i--)
+                {
+                    ans.push_back(a[i][left]);
+                }
+                left++;
+                
+            }
+            dir = (dir + 1) % 4;
+        }
+        
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
+};
+

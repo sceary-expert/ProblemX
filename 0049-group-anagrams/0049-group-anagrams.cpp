@@ -1,6 +1,6 @@
 class Solution {
 public:
-    string getBit(string s)
+    string getBit(string &s)
     {
         // int bit = 0;
         // for(auto &c : s)

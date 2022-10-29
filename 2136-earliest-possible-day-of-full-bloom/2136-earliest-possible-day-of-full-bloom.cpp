@@ -1,17 +1,27 @@
 class Solution {
 public:
     int earliestFullBloom(vector<int>& plantTime, vector<int>& growTime) {
-        int pt = 0, ans = 0, n = plantTime.size();
-        priority_queue<pair<int, int>>pq;
-        for(int i = 0; i < n; i++)pq.push({growTime[i], plantTime[i]});
-        while(pq.size())
-        {        
-            int ptm = pq.top().second;//plantTime[i];
-            pt += ptm;
-            int curr = pt + pq.top().first;//growTime[i];
-            if(curr > ans)ans = curr;       
-            pq.pop();
+        
+        int n = plantTime.size();
+        vector<pair<int, int>> seed(n);
+        int maxDay = 0;
+        
+        for(int i = 0; i<n; i++){
+            seed[i] = {growTime[i],plantTime[i]};
         }
-        return ans;        
+        
+        sort(seed.begin(), seed.end());
+        int sum = 0;
+        
+        for(int i = n - 1; i>= 0; i--){
+            sum += seed[i].second;
+            maxDay = max(maxDay, sum + seed[i].first);
+        }
+        
+        return maxDay;
     }
+    
+    // bool static cmp(pair<int, int> p1, pair<int, int> p2){
+    //     return p1.second>=p2.second;
+    // }
 };

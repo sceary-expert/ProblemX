@@ -1,6 +1,6 @@
 class Solution {
 public:
-    //#define pii pair<int, pair<int, int>>
+    #define pii pair<int, pair<int, int>>
     bool isValid(int ni, int  nj, int m, int  n)
     {
         if(ni < 0 || nj < 0 || ni >= m || nj >= n )return false;
@@ -10,10 +10,9 @@ public:
         int m = grid.size(), n = grid[0].size(), steps = 0;
        // bool vis[m + 1][n + 1][k + 1];
         vector<vector<vector<bool>>>vis(m + 1,  vector<vector<bool>>(n + 1, vector<bool>(k + 1, false)));
-        queue<vector<int>>q;
+        queue<pii>q;
         
-        //q.push({0, {0, k}});
-        q.push({0, 0, k});
+        q.push({0, {0, k}});
         vis[0][0][k] = true;
         vector<vector<int>>dir = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
         while(q.size())
@@ -21,12 +20,12 @@ public:
             int sz = q.size();
             for(int o = 0; o < sz; o++)
             {
-                auto t = q.front();
+                pii t = q.front();
                 q.pop();     
                 
-                int i = t[0];
-                int j = t[1];
-                int l = t[2];
+                int i = t.first;
+                int j = t.second.first;
+                int l = t.second.second;
                 if(i == m - 1 && j == n - 1 && l >= 0)return steps;
                 for(auto &d : dir)
                 {
@@ -36,11 +35,11 @@ public:
                     
                     if(isValid(ni, nj, m, n))
                     {
-                        if(grid[ni][nj] == 1)nl -= grid[ni][nj];
+                        nl -= grid[ni][nj];
                         if(nl >= 0 && vis[ni][nj][nl] == false)
                         {
                             vis[ni][nj][nl] = true;
-                            q.push({ni, nj, nl});
+                            q.push({ni, {nj, nl}});
                         }
                         
                     }

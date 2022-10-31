@@ -1,0 +1,62 @@
+bool isValid(pair<int, int>&p, int i, int j)
+{
+    int a = p.first, b = p.second;
+    if(a == i ||a == j || b == i || b == j)return false;
+    return true;
+}
+
+
+vector<int>fillInd(pair<int, int>&p , int  i, int j)
+{
+    int a = p.first, b = p.second;
+    vector<int>v = {a, b, i, j};
+    return v;
+    
+}
+class Solution {
+  public:
+    vector<int> satisfyEqn(int A[], int N) {
+        // code here
+        //1 2 3 4 7 8 9
+        //
+        vector<int>ans(4, -1);
+        vector<int>res;
+        map<int, pair<int, int>>mp;
+        //sum, {a, b}
+        // vector<pair<int, int>>v;
+        // for(int i = 0; i < N; i++)
+        // {
+        //     v.push_back({A[i], i});
+        // }
+        // sort(v.begin(), v.end());
+        
+        for(int i = 0; i < N; i++)
+        {
+            int  a = A[i];
+            for(int j = i + 1; j < N; j++)
+            {
+                int b = A[j];
+                int sum = a + b;
+                if(mp.find(sum) != mp.end())
+                {
+                    auto p = mp[sum];
+                    if(isValid(p, i, j))
+                    {
+                        vector<int>v = fillInd(p, i, j);
+                        if(res.size() == 0 || v < res)
+                        {
+                            res = v;
+                        }
+                        
+                    }
+                }
+                else
+                {
+                    mp[sum] = {i, j};
+                }
+            }
+        }
+        if(res.size() == 0)return ans;
+        return res;
+    }
+};

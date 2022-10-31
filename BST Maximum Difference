@@ -1,0 +1,43 @@
+class Solution{
+public:
+    int minTillLeaf = -1;
+    bool targetPresent;
+    int FindMinTillLeaf(Node* root)
+    {
+        if(root == NULL)return INT_MAX;
+        int l = FindMinTillLeaf(root -> left);
+        int r = FindMinTillLeaf(root -> right);
+        if(r == INT_MAX && l ==INT_MAX)return root -> data;
+        return root -> data + min(l, r);
+    }
+    int FindSumTillTarget(Node* root, int target)
+    {
+        if(root == NULL)
+        {
+            targetPresent = false;
+        }
+        if(targetPresent == false)return -1;
+        int sum = 0, curr = root -> data;
+        if(curr == target)
+        {
+            minTillLeaf = FindMinTillLeaf(root) - curr;
+            return sum;
+        }
+        sum += curr;
+        if(target < curr) sum += FindSumTillTarget(root -> left, target);
+        else sum += FindSumTillTarget(root -> right, target);
+        
+        return sum;
+    }
+    int maxDifferenceBST(Node *root,int target){
+        
+        //take the sum of [root, target) 
+        //go to the left from the target till we get a leaf node
+        minTillLeaf = -1;    targetPresent = true;
+        int sumTillTarget = FindSumTillTarget(root, target);
+        if(targetPresent == false || minTillLeaf == -1)return -1;
+        if(minTillLeaf == INT_MAX)return -1;
+        //cout<<sumTillTarget<<" "<<minTillLeaf<<endl;
+        return sumTillTarget - minTillLeaf;
+    }
+};

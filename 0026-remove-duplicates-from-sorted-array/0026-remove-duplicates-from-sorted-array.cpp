@@ -7,18 +7,14 @@ public:
             st.insert(it);
         }
         int ind = 0;
-        vector<int>newNums;
+        
         for(auto &it : st)
         {
-            newNums.push_back(it);
-            
+            nums[ind] = it;
+            ind++;
         }
         int n = st.size();
-        for(int i = n; i < nums.size(); i++)
-        // {
-        //     nums[i] = '_';
-        // }
-            nums = newNums;
+        
         return n;
     }
 };

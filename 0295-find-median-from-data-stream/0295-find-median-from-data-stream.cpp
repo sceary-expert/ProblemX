@@ -1,67 +1,47 @@
 class MedianFinder {
 public:
-    priority_queue<int>maxheap;
-    priority_queue<int,vector<int>,greater<int>>minheap;
+    
+    priority_queue<int>mxh;
+    priority_queue<int, vector<int>, greater<int>>mnh;
+    //int sz;
     MedianFinder() {
-        
+        //sz = 0;
     }
     
     void addNum(int num) {
-        if(maxheap.empty()&&minheap.empty()){
-            maxheap.push(num);
-        }
+        if(mxh.size() == 0 && mnh.size() == 0)mxh.push(num);
         else{
-            if(maxheap.top()<num){
-                minheap.push(num);
+            if(num > mxh.top())
+            {
+                mnh.push(num);
             }
-            else maxheap.push(num);
+            else  mxh.push(num);
         }
-       int  m=maxheap.size();
-     int   n=minheap.size();
-        if(m-n==2||m-n==-2){
-            if(m>n){
-                int temp=maxheap.top();
-                maxheap.pop();
-                minheap.push(temp);
-            }
-            else{
-                int temp=minheap.top();
-                minheap.pop();
-                maxheap.push(temp);
-                
-            }
-        }
-        
-        
     }
     
     double findMedian() {
-      int  m=maxheap.size();
-        int n=minheap.size();
-        if(m-n==2||m-n==-2){
-            if(m>n){
-                int temp=maxheap.top();
-                maxheap.pop();
-                minheap.push(temp);
-            }
-            else{
-                int temp=minheap.top();
-                minheap.pop();
-                maxheap.push(temp);
-                
-            }
-        }
-        if((m+n)%2==0){
-            return ((double)maxheap.top()+(double)minheap.top())/2.0;
-        }
-        else {
-            if(m>n){
-                return maxheap.top();
-            }
-            else return minheap.top();
+         while(mnh.size() + 1 < mxh.size())
+         {
+             mnh.push(mxh.top());
+             mxh.pop();
+         }
+        while(mxh.size() < mnh.size()){
+            mxh.push(mnh.top());
+            mnh.pop();
         }
         
-    }//
+        //cout<<mxh.size()<<" "<<mnh.size()<<" " <<mxh.top()<<endl;
+        if(mxh.size() == mnh.size())
+        {
+            auto ans = 0.0;
+            ans += mxh.top();
+            ans += mnh.top();
+            
+            return ans / 2.0;
+        }
+        
+        return 1.0 * mxh.top();
+    }
 };
 
 /**

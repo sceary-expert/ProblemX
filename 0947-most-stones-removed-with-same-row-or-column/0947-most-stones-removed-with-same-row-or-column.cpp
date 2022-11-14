@@ -1,28 +1,44 @@
 class Solution {
 public:
-    int DFS(vector<vector<int>>&stones, vector<int>&vis, int ind, int n)
+    vector<int>par;
+    void DSU(int n)
     {
-        vis[ind]++;
-        int x = stones[ind][0], y = stones[ind][1], ans = 1;
+        par.resize(n);
         for(int i = 0; i < n; i++)
         {
-            if(vis[i] == 0)
+            par[i] = i;
+        }
+    }
+    void mergeSet(int i, int j)
+    {
+      par[i] = j;  
+    }
+    int findParent(int i)
+    {
+        if(par[i] == i)return i;
+        return par[i] = findParent(par[i]);
+    }
+    bool canJoint(int i, int j)
+    {
+        int parent_of_i = findParent(i);
+        int parent_of_j = findParent(j);
+        if(parent_of_i == parent_of_j)return false;
+        mergeSet(parent_of_i, parent_of_j);
+        return true;
+    }
+    int removeStones(vector<vector<int>>& stones) {
+        int n = stones.size(), ans = 0;
+        DSU(n);
+        for(int i = 0; i < n; i++)
+        {
+            for(int j = i + 1; j < n; j++)
             {
-                if(stones[i][0] == x || stones[i][1] == y)
+                if(stones[i][0] == stones[j][0] || stones[i][1] == stones[j][1])
                 {
-                    ans += DFS(stones, vis, i, n);
+                    if(canJoint(i, j))ans++;
                 }
             }
         }
         return ans;
-    }
-    int removeStones(vector<vector<int>>& stones) {
-        int ans =  1, n = stones.size();
-        vector<int>vis(n, 0);
-        for(int i = 0; i < n; i++)
-        {
-            if(vis[i] == 0)ans += (DFS(stones, vis, i, n) - 1);
-        }
-        return ans - 1;
     }
 };

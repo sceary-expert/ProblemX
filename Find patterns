@@ -1,0 +1,39 @@
+
+class Solution{   
+public:
+    bool SubsequencePresent(string& S, string W, int p, int p2)
+    {
+        if(p2 == -1)return true;
+        while(p >= 0)
+        {
+            if(S[p] == W[p2])
+            {
+                S[p] = '$';
+                if(SubsequencePresent(S, W, p - 1, p2 - 1))return true;
+            }
+            p--;
+        }
+        return false;
+    }
+    int numberOfSubsequences(string S, string W){
+        int n = S.size(), m = W.size();
+        
+        int p = n - 1, p1 = n - 1, p2 = m - 1;
+        
+        int ans  = 0;
+        
+        while(p >= 0)
+        {
+            if(S[p] == W[p2])
+            {
+                if(SubsequencePresent(S, W, p - 1, p2 - 1))ans++;
+                else break;
+            }
+            p--;
+        }
+        return ans;
+        
+        
+    }
+};
+

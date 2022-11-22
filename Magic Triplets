@@ -1,0 +1,29 @@
+class Solution{
+	public:
+	vector<vector<int>>greaterElementOnRight;
+	void calculateGreaterElementOnRight(vector<int>&nums, int n)
+	{
+	    greaterElementOnRight.resize(n);
+	    for(int i = n - 1; i >= 0; i--)
+	    {
+	        for(int j = i + 1; j < n; j++)
+	        {
+	            if(nums[j] > nums[i])greaterElementOnRight[i].push_back(j);
+	        }
+	    }
+	}
+	int countTriplets(vector<int>nums){
+	    
+	    int n = nums.size(), ans = 0;
+	    calculateGreaterElementOnRight(nums, n);
+	    for(int i = 0; i < n; i++)
+	    {
+	        if(greaterElementOnRight[i].size() == 0)continue;
+	        for(auto &it : greaterElementOnRight[i])
+	        {
+	            ans += greaterElementOnRight[it].size();
+	        }
+	    }
+	    return ans;
+	}
+};

@@ -8,7 +8,7 @@ class Solution {
             freq[k + a]++;
         }
         Arrays.sort(freq);
-        for(int i = 0; i < 2 * k; i++)
+        for(int i = k * 2 - 1; i >= 0; i--)
         {
             if(freq[i] != 0 && freq[i] == freq[i + 1])return false;
             

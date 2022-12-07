@@ -104,18 +104,18 @@ class GFG {
 
 class Solution {
     // Return the Kth smallest element in the given BST
-    ArrayList<Integer>v;
-    void Helper(Node root)
+    // ArrayList<Integer>v;
+    void Helper(Node root, ArrayList<Integer>v)
     {
         if(root == null)return;
-        Helper(root.left);
+        Helper(root.left, v);
         v.add(root.data);
-        Helper(root.right);
+        Helper(root.right, v);
     }
     public int KthSmallestElement(Node root, int K) {
-    v = new ArrayList<>();
+    ArrayList<Integer>v = new ArrayList<>();
     // vector<int>v;
-    Helper(root);
+    Helper(root, v);
     if(v.size() < K)return -1;
     return v.get(K - 1);
     }

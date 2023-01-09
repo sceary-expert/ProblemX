@@ -11,11 +11,16 @@ class Solution {
   public:
     int solve(int N, vector<int> A) {
         // code here
-        int ans = N - 1;
+        int ans = N;
         for(int i = N - 1; i >= 0; i--)
         {
-            // cout<<i<<" "<<A[i]<<" ";
-           if(A[i] < 9)return i + 1;
+            if(A[i] == 0)break;
+            else if(A[i] == 9)ans = i + 1;
+            else {
+                ans = i + 1;
+                // cout<<"ans : "<<ans<<endl;
+                break;
+            }
         }
         return ans;
     }

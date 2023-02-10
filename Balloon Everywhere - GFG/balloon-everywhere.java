@@ -38,6 +38,7 @@ class Solution {
             arr[c - 'a']++;
         }
         arr['o' - 'a'] /= 2;
+        arr['l' - 'a'] /= 2;
         int mn = Integer.MAX_VALUE;
         mn = Math.min(mn, arr['b' - 'a']);
         mn = Math.min(mn, arr['a' - 'a']);

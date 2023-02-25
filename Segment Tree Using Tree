@@ -1,0 +1,204 @@
+typedef struct Node{
+  int val;
+  Node *left, *right;
+  Node()
+  {
+    val = 0;
+    left = right = NULL;
+  }
+  Node(int v)
+  {
+    val = v;
+    left = right = NULL;
+  }
+
+}Node;
+
+const int N = (int)(1e5 + 5);
+int a[N];
+void construct(int beg, int end, Node *curr)
+{
+  if(beg == end)
+  {
+    curr -> val = a[beg];
+    return;
+  }
+  int mid = (beg + end) / 2;
+  curr -> left = new Node();
+  curr -> right = new Node();
+  construct(beg, mid, curr -> left);
+  construct(mid + 1, end, curr -> right);
+  curr -> val = curr -> left -> val + curr -> right -> val;
+}
+
+int query(int beg, int end, int ql, int qr, Node *curr)
+{
+  //if completely under range
+  if(beg >= ql && end <= qr)
+  {
+    return curr -> val;
+
+  }
+  else if(end < ql || beg > qr)
+  {
+    return 0;
+  }
+  int mid = (beg + end) / 2;
+  return query(beg, mid, ql, qr, curr -> left) + query(mid + 1, end, ql, qr, curr -> right);
+
+
+}
+
+void update(int beg, int end, int idx, int val, Node *curr)
+{
+  if(beg == end)
+  {
+    curr -> val = val;
+    return;
+  }
+  int mid = (beg + end) / 2;
+  if(idx <= mid)
+  {
+    update(beg, mid, idx, val, curr -> left);
+  }
+  else{
+    update(mid + 1, end, idx, val, curr -> right);
+  }
+  curr -> val = curr -> left -> val + curr -> right -> val;
+  return;
+  // if()
+
+}
+/*#define mid (beg + end) / 2
+#define N  (int)(1e5 + 5)
+
+int st[4 * N];
+int lazy[4 * N];
+int a[N];
+
+void push_down(int pos, int beg, int end)
+{
+  if(lazy[pos] != 0)
+  {
+    st[pos] += lazy[pos] * (1 + end - beg);
+    if(beg != end)
+    {
+      lazy[2 * pos + 1] += lazy[pos];
+      lazy[2 * pos + 2] += lazy[pos];
+    }
+    lazy[pos] = 0;
+  }
+}
+int query(int beg, int end, int ql, int qr, int pos)
+{
+  push_down(pos, beg, end);
+  if(ql <= beg && qr >= end)
+  {
+    return st[pos];
+  }
+  else if(ql > end || qr < beg)
+  {
+    return 0;
+  }
+  return query(beg, mid, ql, qr, 2 * pos + 1) +
+  query(mid + 1, end, ql, qr, 2 * pos + 2);
+
+}
+void build(int beg, int end, int pos)
+{
+  if(beg == end)
+  {
+    st[pos] = a[beg];
+    return;
+  }
+  build(beg, mid, 2 * pos + 1);
+  build(mid + 1, end, 2 * pos + 2);
+  st[pos] = st[2 * pos + 1] + st[2 * pos + 2];
+}
+void update(int beg, int end, int ul, int ur, int val, int pos)
+{
+  push_down(pos, beg, end);
+  if(ul <= beg && ur >= end)
+  {
+    lazy[pos] = val;
+    push_down(pos, beg, end);
+    return;
+  }
+  else if(beg > ur ||end < ul)
+  {
+    return;
+  }
+  update(beg, mid, ul, ur, val, 2 * pos + 1);
+  update(mid + 1, end, ul, ur, val, 2 * pos + 2);
+  st[pos] = st[2 * pos + 1] + st[2 * pos + 2];
+
+
+}
+*/
+
+/*
+
+int st[4 * N];
+int lazy[4 * N];
+int a[N];
+
+void push_down(int pos, int beg, int end)
+{
+  if(lazy[pos] != 0)
+  {
+    st[pos] += (end - beg + 1 - st[pos]);//lazy[pos] * (1 + end - beg);
+    if(beg != end)
+    {
+      lazy[2 * pos + 1] = (lazy[2 * pos + 1] + lazy[pos]) % 2;//+= lazy[pos];
+      lazy[2 * pos + 2] = (lazy[2 * pos + 2] + lazy[pos]) % 2;//+= lazy[pos];
+    }
+    lazy[pos] = 0;
+  }
+}
+int query(int beg, int end, int ql, int qr, int pos)
+{
+  push_down(pos, beg, end);
+  if(ql <= beg && qr >= end)
+  {
+    return st[pos];
+  }
+  else if(ql > end || qr < beg)
+  {
+    return 0;
+  }
+  return query(beg, mid, ql, qr, 2 * pos + 1) +
+  query(mid + 1, end, ql, qr, 2 * pos + 2);
+
+}
+void build(int beg, int end, int pos)
+{
+  if(beg == end)
+  {
+    st[pos] = a[beg];
+    return;
+  }
+  build(beg, mid, 2 * pos + 1);
+  build(mid + 1, end, 2 * pos + 2);
+  st[pos] = st[2 * pos + 1] + st[2 * pos + 2];
+}
+void update(int beg, int end, int ul, int ur, int pos)
+{
+  push_down(pos, beg, end);
+  if(ul <= beg && ur >= end)
+  {
+    lazy[pos] = (lazy[pos] + 1) % 2;//val;
+    push_down(pos, beg, end);
+    return;
+  }
+  else if(beg > ur ||end < ul)
+  {
+    return;
+  }
+  update(beg, mid, ul, ur, 2 * pos + 1);
+  update(mid + 1, end, ul, ur, 2 * pos + 2);
+  st[pos] = st[2 * pos + 1] + st[2 * pos + 2];
+
+
+}
+*/
+

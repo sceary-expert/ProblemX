@@ -22,14 +22,16 @@ public:
         for(auto &interval : intervals)
         {
             int start = interval[0], end = interval[1];
-            frequency[start]++;
-            frequency[end + 1]--;
+            if(start > 0)frequency[start - 1]--;
+            frequency[end]++;
         }
         int sum = 0, answer = -1;
-        for(int i = 0; i <= mx; i++)
+        for(int i = mx; i >= 0; i--)
         {
             sum += frequency[i];
-            if(sum >= k )answer = max(answer, i);
+            if(sum >= k )
+            return i;
+            // answer = max(answer, i);
         }
         return answer;
     }

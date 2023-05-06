@@ -31,9 +31,9 @@ class Solution {
         int j = target, i = K;
         vector<vector<bool>>v(K + 1, vector<bool>(target + 1, false));
         v[0][0] = true;
-        for(int i = 1; i <= K; i++)
+        for(int j = 1; j <= target; j++)
         {
-            for(int j = 1; j <= target; j++)
+            for(int i = 1; i <= K; i++)
             {
                 for(auto c : coin)
                 {

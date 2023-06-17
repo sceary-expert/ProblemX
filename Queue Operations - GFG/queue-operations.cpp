@@ -12,7 +12,7 @@ class Solution{
     // Function to insert element into the queue
     map<int, int>mp;
     void insert(queue<int> &q, int k){
-        q.push(k);
+        // q.push(k);
         mp[k]++;
     }
     

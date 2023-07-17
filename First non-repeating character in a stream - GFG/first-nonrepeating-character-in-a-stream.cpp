@@ -3,11 +3,12 @@
 using namespace std;
 
 // } Driver Code Ends
+
 class Solution {
 	public:
 		string FirstNonRepeating(string A){
 		    // Code here
-		    set<char>st;
+		    
 		    map<char, int>mp;
 		    char fnr = A[0];
 		    int p = 0;
@@ -16,7 +17,7 @@ class Solution {
 		    {
 		        char c = A[i];
 		        mp[c]++;
-		        st.insert(c);
+
 		        if(mp[fnr] != 1 )
 		        {
 		            for(; p <= i; p++)
@@ -39,6 +40,7 @@ class Solution {
 		}
 
 };
+
 
 //{ Driver Code Starts.
 int main(){

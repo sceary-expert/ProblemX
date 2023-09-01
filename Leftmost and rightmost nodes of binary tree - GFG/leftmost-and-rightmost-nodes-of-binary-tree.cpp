@@ -138,8 +138,7 @@ void printCorner(Node *root)
     while(q.size())
     {
         int curr_q_size = q.size();
-        Node* l = NULL;
-        Node* r = NULL;
+        Node* l = NULL, *r = NULL;
         while(curr_q_size--)
         {
             auto fr = q.front();
